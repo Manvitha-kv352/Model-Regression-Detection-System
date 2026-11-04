@@ -1,0 +1,328 @@
+
+{
+  "dataset_version": "v2",
+  "description": "Customer support email classifier evaluation dataset",
+  "total_cases": 30,
+  "categories": [
+    "billing",
+    "technical",
+    "account",
+    "general"
+  ],
+  "test_cases": [
+    {
+      "id": "TC001",
+      "input": "I was charged twice for my monthly subscription.",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer was charged twice for their monthly subscription."
+      },
+      "difficulty": "easy",
+      "notes": "Basic duplicate-charge case used to test billing classification."
+    },
+    {
+      "id": "TC002",
+      "input": "I requested a refund five days ago, but the money has not arrived.",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer has not received their requested refund."
+      },
+      "difficulty": "easy",
+      "notes": "Tests whether the model recognizes a delayed refund request."
+    },
+    {
+      "id": "TC003",
+      "input": "My invoice shows an incorrect amount for this month.",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer reports an incorrect amount on their invoice."
+      },
+      "difficulty": "easy",
+      "notes": "Tests recognition of incorrect invoice amounts."
+    },
+    {
+      "id": "TC004",
+      "input": "I forgot my password and cannot log into my account.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer cannot access their account because they forgot their password."
+      },
+      "difficulty": "easy",
+      "notes": "Basic password-recovery case used to test account classification."
+    },
+    {
+      "id": "TC005",
+      "input": "My account has been locked and I cannot sign in.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer is unable to sign in because their account is locked."
+      },
+      "difficulty": "easy",
+      "notes": "Tests whether the model recognizes account-lockout problems."
+    },
+    
+    {
+      "id": "TC006",
+      "input": "I want to update the email address associated with my profile.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer wants to change the email address linked to their profile."
+      },
+      "difficulty": "easy",
+      "notes": "Tests recognition of profile and account information updates."
+    },
+    {
+      "id": "TC007",
+      "input": "The application crashes every time I try to open it.",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer reports that the application crashes when opened."
+      },
+      "difficulty": "easy",
+      "notes": "Basic application-crash case used to test technical classification."
+    },
+    {
+      "id": "TC008",
+      "input": "I receive an error message whenever I try to upload a file.",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer encounters an error when attempting to upload a file."
+      },
+      "difficulty": "easy",
+      "notes": "Tests recognition of file-upload failures."
+    },
+    {
+      "id": "TC009",
+      "input": "What are your customer support working hours?",
+      "expected_output": {
+        "category": "general",
+        "summary": "Customer wants to know the customer support working hours."
+      },
+      "difficulty": "easy",
+      "notes": "Basic general enquiry used to test non-issue-specific requests."
+    },
+    {
+      "id": "TC010",
+      "input": "I would like to suggest adding a dark mode to your application.",
+      "expected_output": {
+        "category": "general",
+        "summary": "Customer suggests adding a dark mode to the application."
+      },
+      "difficulty": "easy",
+      "notes": "Tests recognition of product feedback and feature suggestions."
+    }
+
+    
+    ,
+    {
+      "id": "TC011",
+      "input": "hey i cant loggin to my acount plz help me asap",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer cannot log in to their account and needs assistance."
+      },
+      "difficulty": "noisy",
+      "notes": "Tests account classification despite spelling mistakes and informal language."
+    },
+    {
+      "id": "TC012",
+      "input": "my app keeps crshing wen i open it",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer reports that the application crashes whenever they open it."
+      },
+      "difficulty": "noisy",
+      "notes": "Tests recognition of application crashes despite spelling errors."
+    },
+    {
+      "id": "TC013",
+      "input": "u charged me 2 times for dis month",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer reports being charged twice this month."
+      },
+      "difficulty": "noisy",
+      "notes": "Tests duplicate-payment recognition in informal abbreviated language."
+    },
+    {
+      "id": "TC014",
+      "input": "i need 2 chang my email adress on profile",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer wants to change the email address associated with their profile."
+      },
+      "difficulty": "noisy",
+      "notes": "Tests profile-update recognition despite spelling and grammatical errors."
+    },
+    {
+      "id": "TC015",
+      "input": "whr can i find ur support timings??",
+      "expected_output": {
+        "category": "general",
+        "summary": "Customer wants to know the customer support working hours."
+      },
+      "difficulty": "noisy",
+      "notes": "Tests general enquiry recognition despite abbreviations and informal wording."
+    },
+    {
+      "id": "TC016",
+      "input": "refund not recived yet its been 1 week",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer has not received their refund after one week."
+      },
+      "difficulty": "noisy",
+      "notes": "Tests refund-related classification despite spelling and grammar errors."
+    }
+
+    
+    ,
+    {
+      "id": "TC017",
+      "input": "My payment was successful, but my premium subscription is still inactive.",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer's payment was successful, but their premium subscription has not been activated."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Tests whether the model recognizes a payment-related subscription activation problem."
+    },
+    {
+      "id": "TC018",
+      "input": "I can log in, but my account dashboard shows an error every time.",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer can log in but encounters an error on the account dashboard."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Distinguishes a technical dashboard error from an account access problem."
+    },
+    {
+      "id": "TC019",
+      "input": "I received my refund, but the refunded amount is less than what I paid.",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer received a refund but reports that the refunded amount is incorrect."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Tests recognition of an incorrect refund amount rather than a missing refund."
+    },
+    {
+      "id": "TC020",
+      "input": "I forgot my password, and the reset link keeps showing an error.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer cannot reset their password because the reset link produces an error."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Tests whether the model identifies account recovery as the primary issue despite a technical error message."
+    },
+    {
+      "id": "TC021",
+      "input": "I want to cancel my subscription because the application keeps crashing.",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer wants to cancel their subscription because the application repeatedly crashes."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Tests whether the model identifies the application crashes as the reason behind the cancellation request."
+    },
+    {
+      "id": "TC022",
+      "input": "Can you explain why my account was charged after I cancelled my plan?",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer reports being charged after cancelling their subscription."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Distinguishes an unexpected charge from a general account-related enquiry."
+    },
+    {
+      "id": "TC023",
+      "input": "I updated my profile, but the application still displays my old email address.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer's profile continues to display their old email address after an update."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Tests profile information update problems that could be mistaken for general application errors."
+    },
+    {
+      "id": "TC024",
+      "input": "Your application is very slow, and I would like to know if this is a known issue.",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer reports slow application performance and asks whether it is a known issue."
+      },
+      "difficulty": "ambiguous",
+      "notes": "Tests whether the model prioritizes the reported performance issue over the general question."
+    }
+
+    
+    ,
+    {
+      "id": "TC025",
+      "input": "I subscribed to your premium plan last week. Today I noticed two payments were deducted from my bank account for the same subscription. Please check the duplicate transaction and refund the extra amount.",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer was charged twice for the same premium subscription and requests a refund of the duplicate payment."
+      },
+      "difficulty": "complex",
+      "notes": "Tests whether the model identifies duplicate billing as the primary issue in a multi-sentence email."
+    },
+    {
+      "id": "TC026",
+      "input": "I recently changed my phone number and now I cannot access my account. The login page keeps asking me to verify using my old number, which I no longer have. Please help me update my account recovery details.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer cannot access their account because verification is linked to an old phone number."
+      },
+      "difficulty": "complex",
+      "notes": "Tests account recovery classification when several related access problems are described."
+    },
+    {
+      "id": "TC027",
+      "input": "Whenever I open the application, it takes almost a minute to load. Sometimes the screen freezes, and when I try to upload a document, the application closes unexpectedly. This started happening after the latest update.",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer reports slow loading, freezing, and unexpected crashes when uploading documents after a recent application update."
+      },
+      "difficulty": "complex",
+      "notes": "Tests whether the model captures multiple technical symptoms in one concise summary."
+    },
+    {
+      "id": "TC028",
+      "input": "I purchased a yearly subscription three weeks ago, but the service did not meet my expectations. I contacted support earlier and was told that my refund would be processed within five business days. It has now been two weeks, and I still haven't received the money. Could you please check the refund status?",
+      "expected_output": {
+        "category": "billing",
+        "summary": "Customer has not received the promised refund for their yearly subscription and requests a status update."
+      },
+      "difficulty": "complex",
+      "notes": "Tests identification of the primary refund issue among several timeline and subscription details."
+    },
+    {
+      "id": "TC029",
+      "input": "I have been trying to update my account details for the past two days. The profile page allows me to enter a new email address, but after clicking save, it returns to the old address. I also tried logging out and logging back in, but nothing changed.",
+      "expected_output": {
+        "category": "account",
+        "summary": "Customer cannot update their account email address because the profile continues to revert to the old address."
+      },
+      "difficulty": "complex",
+      "notes": "Tests account-profile issue recognition across multiple troubleshooting details."
+    },
+    {
+      "id": "TC030",
+      "input": "I have a question about your application's latest version. Since installing the update yesterday, the application has become extremely slow and frequently displays an unexpected error. Is there a way to fix this without reinstalling the application?",
+      "expected_output": {
+        "category": "technical",
+        "summary": "Customer experiences slow performance and unexpected errors after the latest application update and asks how to fix them."
+      },
+      "difficulty": "complex",
+      "notes": "Tests technical issue recognition and summary generation when a customer also asks for troubleshooting advice."
+    }
+
+
+
+
+  ]
+}
