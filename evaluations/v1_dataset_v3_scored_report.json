@@ -1,0 +1,524 @@
+{
+    "prompt_version": "v1",
+    "dataset_version": "v3",
+    "routing_policy_version": "v1",
+    "evaluation_type": "cached_predictions_rescored",
+    "source_dataset_version": "v2",
+    "source_fingerprint": "de646c2d8a7f4ea37766ab7c275876bb463f0711ccbe7d5fe993dad1f89a9525",
+    "summary": {
+        "total_cases": 30,
+        "correct_categories": 29,
+        "category_accuracy": 96.67,
+        "average_summary_relevance": 4.9,
+        "difficulty_accuracy": {
+            "easy": 100.0,
+            "ambiguous": 88.89,
+            "noisy": 100.0,
+            "complex": 100.0
+        },
+        "accuracy_by_category": {
+            "general": {
+                "total": 2,
+                "correct": 2,
+                "accuracy_percent": 100.0
+            },
+            "billing": {
+                "total": 11,
+                "correct": 10,
+                "accuracy_percent": 90.91
+            },
+            "account": {
+                "total": 9,
+                "correct": 9,
+                "accuracy_percent": 100.0
+            },
+            "technical": {
+                "total": 8,
+                "correct": 8,
+                "accuracy_percent": 100.0
+            }
+        }
+    },
+    "results": [
+        {
+            "test_id": "TC001",
+            "difficulty": "easy",
+            "expected_category": "general",
+            "predicted_category": "general",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the customer's suggestion without adding or omitting any key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC002",
+            "difficulty": "ambiguous",
+            "expected_category": "billing",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 0,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the customer's intent to cancel due to app crashes, with no added or omitted information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC003",
+            "difficulty": "easy",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the original email without adding or omitting any information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC004",
+            "difficulty": "ambiguous",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the customer's issue and request without adding or omitting any key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC005",
+            "difficulty": "easy",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the main issue without adding or omitting any key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC006",
+            "difficulty": "ambiguous",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the payment success and inactive subscription without adding or omitting key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC007",
+            "difficulty": "easy",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Fully accurate and faithful to the email",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC008",
+            "difficulty": "noisy",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the customer's request to change their email address on their profile without adding or omitting any key information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC009",
+            "difficulty": "easy",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the customer's issue without adding or omitting any key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC010",
+            "difficulty": "easy",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 4,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Accurate summary of main issue, but omits details such as subscription type, time elapsed, prior communication, and request to check status.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC011",
+            "difficulty": "noisy",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the customer's payment for premium, the account still showing free, and the request for a fix.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC012",
+            "difficulty": "ambiguous",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 4,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Accurately captures the main issue (settings page freezing when changing notification preferences) but omits the detail that sign‑in works normally and the customer’s question about account status.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC013",
+            "difficulty": "ambiguous",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the main issue—refund received but amount is less than paid—without adding or omitting any critical details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC014",
+            "difficulty": "complex",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 4,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Accurate summary of the main issue; minor omission of the logout attempt.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC015",
+            "difficulty": "easy",
+            "expected_category": "general",
+            "predicted_category": "general",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Accurately captures the question about support hours.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC016",
+            "difficulty": "noisy",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the main issue without adding or omitting any key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC017",
+            "difficulty": "complex",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the main issue (slow performance and errors after update) and the customer's request for a fix without reinstalling, with no added or missing critical information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC018",
+            "difficulty": "ambiguous",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the main issue—reset link error preventing password reset—without adding or omitting critical details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC019",
+            "difficulty": "complex",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the main issue—login failure due to an outdated recovery phone number—and correctly states the need for an update, with no added or missing critical details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC020",
+            "difficulty": "ambiguous",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the customer's complaint and request without adding or omitting any key information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC021",
+            "difficulty": "noisy",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the customer's issue and timeframe without adding or omitting any key details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC022",
+            "difficulty": "easy",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Exact match, fully accurate.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC023",
+            "difficulty": "ambiguous",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the original email without adding or omitting any key information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC024",
+            "difficulty": "complex",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "The summary accurately captures all key points of the original email without adding or omitting any critical information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC025",
+            "difficulty": "easy",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the request for a refund and the fact that the money has not arrived, with no added or missing information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC026",
+            "difficulty": "noisy",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the customer's inability to log in and request for help, with no added or missing information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC027",
+            "difficulty": "easy",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the main issue of being double-charged for the monthly subscription.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC028",
+            "difficulty": "ambiguous",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the main issue—an error on the account dashboard after logging in—without adding or omitting any critical details.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC029",
+            "difficulty": "noisy",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately reflects the customer’s claim of being charged twice for the month, with no added or omitted information.",
+            "technical_error": null,
+            "judge_error": null
+        },
+        {
+            "test_id": "TC030",
+            "difficulty": "complex",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "scores": {
+                "schema_valid": true,
+                "category_match": 1,
+                "summary_relevance": 5,
+                "latency_ms": null,
+                "token_usage": null
+            },
+            "judge_reason": "Summary accurately captures the duplicate payment issue and refund request without adding or omitting critical details.",
+            "technical_error": null,
+            "judge_error": null
+        }
+    ]
+}

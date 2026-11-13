@@ -1,0 +1,59 @@
+{
+    "fingerprint": "7b69de2daff1ea1671e1ae3fb9f86d5fb4050bdabf21b2c3b780fc1b29f9bb43",
+    "results": [
+        {
+            "test_id": "TC001",
+            "expected_category": "general",
+            "predicted_category": "general",
+            "predicted_summary": "Simulated result",
+            "raw_output": "{\"category\":\"test\"}",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC002",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "predicted_summary": "Simulated result",
+            "raw_output": "{\"category\":\"test\"}",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC003",
+            "expected_category": "account",
+            "predicted_category": "account",
+            "predicted_summary": "Simulated result",
+            "raw_output": "{\"category\":\"test\"}",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC004",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "predicted_summary": "Simulated result",
+            "raw_output": "{\"category\":\"test\"}",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC005",
+            "expected_category": "technical",
+            "predicted_category": "technical",
+            "predicted_summary": "Simulated result",
+            "raw_output": "{\"category\":\"test\"}",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC006",
+            "expected_category": "billing",
+            "predicted_category": "billing",
+            "predicted_summary": "Simulated result",
+            "raw_output": "{\"category\":\"test\"}",
+            "error": null,
+            "status": "PASS"
+        }
+    ]
+}

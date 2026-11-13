@@ -1,0 +1,257 @@
+{
+    "fingerprint": "7b69de2daff1ea1671e1ae3fb9f86d5fb4050bdabf21b2c3b780fc1b29f9bb43",
+    "results": [
+        {
+            "test_id": "TC001",
+            "expected_category": "general",
+            "raw_output": "{\"category\":\"general\",\"summary\":\"Customer suggests adding a dark mode feature to the application.\"}",
+            "predicted_category": "general",
+            "predicted_summary": "Customer suggests adding a dark mode feature to the application.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC002",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"The customer reports that the application keeps crashing and wants to cancel their subscription.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "The customer reports that the application keeps crashing and wants to cancel their subscription.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC003",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"Customer’s account is locked and they cannot sign in.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "Customer’s account is locked and they cannot sign in.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC004",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer was charged after canceling their plan and wants an explanation.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer was charged after canceling their plan and wants an explanation.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC005",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"Customer reports an error message when attempting to upload a file.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "Customer reports an error message when attempting to upload a file.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC006",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer paid successfully but subscription remains inactive.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer paid successfully but subscription remains inactive.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC007",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"The customer wants to update the email address associated with their profile.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "The customer wants to update the email address associated with their profile.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC008",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"Customer wants to change their email address on their profile.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "Customer wants to change their email address on their profile.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC009",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"Customer forgot password and cannot log into their account.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "Customer forgot password and cannot log into their account.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC010",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer is waiting for a refund that has not yet been processed.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer is waiting for a refund that has not yet been processed.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC013",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer received a refund that is less than the amount they originally paid.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer received a refund that is less than the amount they originally paid.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC014",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"Customer cannot update their email address on the profile page; changes revert after saving.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "Customer cannot update their email address on the profile page; changes revert after saving.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC015",
+            "expected_category": "general",
+            "raw_output": "{\"category\":\"general\",\"summary\":\"The customer is asking about the customer support working hours.\"}",
+            "predicted_category": "general",
+            "predicted_summary": "The customer is asking about the customer support working hours.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC016",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"The user reports that the app crashes when opened.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "The user reports that the app crashes when opened.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC017",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"Customer reports that after updating, the app is slow and shows errors, and asks for a fix without reinstalling.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "Customer reports that after updating, the app is slow and shows errors, and asks for a fix without reinstalling.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC018",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"Customer cannot reset password because the reset link shows an error.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "Customer cannot reset password because the reset link shows an error.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC019",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"User cannot log in because the account recovery phone number is outdated and needs updating.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "User cannot log in because the account recovery phone number is outdated and needs updating.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC020",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"Customer reports that the application is very slow and asks if this is a known issue.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "Customer reports that the application is very slow and asks if this is a known issue.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC021",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer has not received their refund after one week.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer has not received their refund after one week.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC022",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"The application crashes every time I try to open it.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "The application crashes every time I try to open it.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC023",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"User updated profile but the application still displays the old email address.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "User updated profile but the application still displays the old email address.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC024",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"The application is slow to load, freezes, and crashes when uploading documents after the latest update.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "The application is slow to load, freezes, and crashes when uploading documents after the latest update.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC025",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer is waiting for a refund that hasn't arrived yet.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer is waiting for a refund that hasn't arrived yet.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC026",
+            "expected_category": "account",
+            "raw_output": "{\"category\":\"account\",\"summary\":\"Customer is unable to log in to their account and requests help.\"}",
+            "predicted_category": "account",
+            "predicted_summary": "Customer is unable to log in to their account and requests help.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC027",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer was double-charged for their monthly subscription.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer was double-charged for their monthly subscription.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC028",
+            "expected_category": "technical",
+            "raw_output": "{\"category\":\"technical\",\"summary\":\"Customer reports an error appearing on the account dashboard after logging in.\"}",
+            "predicted_category": "technical",
+            "predicted_summary": "Customer reports an error appearing on the account dashboard after logging in.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC029",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer reports being charged twice for the month.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer reports being charged twice for the month.",
+            "error": null,
+            "status": "PASS"
+        },
+        {
+            "test_id": "TC030",
+            "expected_category": "billing",
+            "raw_output": "{\"category\":\"billing\",\"summary\":\"Customer reports duplicate payment for premium subscription and requests a refund.\"}",
+            "predicted_category": "billing",
+            "predicted_summary": "Customer reports duplicate payment for premium subscription and requests a refund.",
+            "error": null,
+            "status": "PASS"
+        }
+    ]
+}

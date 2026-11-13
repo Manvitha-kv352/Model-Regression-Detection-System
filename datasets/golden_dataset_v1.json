@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -8,45 +7,45 @@
   },
   {
     "id": 2,
-    "email": "I requested a refund five days ago, but the money has not arrived.",
-    "expected_category": "billing",
-    "expected_summary": "Customer has not received their requested refund."
+    "email": "hey i cant loggin to my acount plz help me asap",
+    "expected_category": "account",
+    "expected_summary": "Customer cannot log in to their account and needs assistance."
   },
   {
     "id": 3,
-    "email": "My invoice shows an incorrect amount for this month.",
+    "email": "My payment was successful, but my premium subscription is still inactive.",
     "expected_category": "billing",
-    "expected_summary": "Customer reports an incorrect amount on their invoice."
+    "expected_summary": "Customer's payment was successful, but their premium subscription has not been activated."
   },
   {
     "id": 4,
+    "email": "I subscribed to your premium plan last week. Today I noticed two payments were deducted from my bank account for the same subscription. Please check the duplicate transaction and refund the extra amount.",
+    "expected_category": "billing",
+    "expected_summary": "Customer was charged twice for the same premium subscription and requests a refund of the duplicate payment."
+  },
+  {
+    "id": 5,
     "email": "I forgot my password and cannot log into my account.",
     "expected_category": "account",
     "expected_summary": "Customer cannot access their account because they forgot their password."
   },
   {
-    "id": 5,
-    "email": "My account has been locked and I cannot sign in.",
-    "expected_category": "account",
-    "expected_summary": "Customer is unable to sign in because their account is locked."
-  },
-  {
     "id": 6,
-    "email": "I want to update the email address associated with my profile.",
-    "expected_category": "account",
-    "expected_summary": "Customer wants to change the email address linked to their profile."
+    "email": "my app keeps crshing wen i open it",
+    "expected_category": "technical",
+    "expected_summary": "Customer reports that the application crashes whenever they open it."
   },
   {
     "id": 7,
-    "email": "The application crashes every time I try to open it.",
+    "email": "I can log in, but my account dashboard shows an error every time.",
     "expected_category": "technical",
-    "expected_summary": "Customer reports that the application crashes when opened."
+    "expected_summary": "Customer can log in but encounters an error on the account dashboard."
   },
   {
     "id": 8,
-    "email": "I receive an error message whenever I try to upload a file.",
-    "expected_category": "technical",
-    "expected_summary": "Customer encounters an error when attempting to upload a file."
+    "email": "I recently changed my phone number and now I cannot access my account. The login page keeps asking me to verify using my old number, which I no longer have. Please help me update my account recovery details.",
+    "expected_category": "account",
+    "expected_summary": "Customer cannot access their account because verification is linked to an old phone number."
   },
   {
     "id": 9,
@@ -56,27 +55,28 @@
   },
   {
     "id": 10,
-    "email": "I would like to suggest adding a dark mode to your application.",
-    "expected_category": "general",
-    "expected_summary": "Customer suggests adding a dark mode to the application."
-  },
-  {
-    "id": 11,
-    "email": "hey i cant loggin to my acount plz help me asap",
-    "expected_category": "account",
-    "expected_summary": "Customer cannot log in to their account and needs assistance."
-  },
-  {
-    "id": 12,
-    "email": "my app keeps crshing wen i open it",
-    "expected_category": "technical",
-    "expected_summary": "Customer reports that the application crashes whenever they open it."
-  },
-  {
-    "id": 13,
     "email": "u charged me 2 times for dis month",
     "expected_category": "billing",
     "expected_summary": "Customer reports being charged twice this month."
+  },
+
+  {
+    "id": 11,
+    "email": "I received my refund, but the refunded amount is less than what I paid.",
+    "expected_category": "billing",
+    "expected_summary": "Customer received a refund but reports that the refunded amount is incorrect."
+  },
+  {
+    "id": 12,
+    "email": "Whenever I open the application, it takes almost a minute to load. Sometimes the screen freezes, and when I try to upload a document, the application closes unexpectedly. This started happening after the latest update.",
+    "expected_category": "technical",
+    "expected_summary": "Customer reports slow loading, freezing, and unexpected crashes when uploading documents after a recent application update."
+  },
+  {
+    "id": 13,
+    "email": "The application crashes every time I try to open it.",
+    "expected_category": "technical",
+    "expected_summary": "Customer reports that the application crashes when opened."
   },
   {
     "id": 14,
@@ -86,103 +86,100 @@
   },
   {
     "id": 15,
-    "email": "whr can i find ur support timings??",
-    "expected_category": "general",
-    "expected_summary": "Customer wants to know the customer support working hours."
-  },
-  {
-    "id": 16,
-    "email": "refund not recived yet its been 1 week",
-    "expected_category": "billing",
-    "expected_summary": "Customer has not received their refund after one week."
-  },
-  
-  {
-    "id": 17,
-    "email": "My payment was successful, but my premium subscription is still inactive.",
-    "expected_category": "billing",
-    "expected_summary": "Customer's payment was successful, but their premium subscription has not been activated."
-  },
-  {
-    "id": 18,
-    "email": "I can log in, but my account dashboard shows an error every time.",
-    "expected_category": "technical",
-    "expected_summary": "Customer can log in but encounters an error on the account dashboard."
-  },
-  {
-    "id": 19,
-    "email": "I received my refund, but the refunded amount is less than what I paid.",
-    "expected_category": "billing",
-    "expected_summary": "Customer received a refund but reports that the refunded amount is incorrect."
-  },
-  {
-    "id": 20,
     "email": "I forgot my password, and the reset link keeps showing an error.",
     "expected_category": "account",
     "expected_summary": "Customer cannot reset their password because the reset link produces an error."
   },
   {
-    "id": 21,
-    "email": "I want to cancel my subscription because the application keeps crashing.",
-    "expected_category": "technical",
-    "expected_summary": "Customer wants to cancel their subscription because the application repeatedly crashes."
-  },
-  {
-    "id": 22,
-    "email": "Can you explain why my account was charged after I cancelled my plan?",
-    "expected_category": "billing",
-    "expected_summary": "Customer reports being charged after cancelling their subscription."
-  },
-  {
-    "id": 23,
-    "email": "I updated my profile, but the application still displays my old email address.",
-    "expected_category": "account",
-    "expected_summary": "Customer's profile continues to display their old email address after an update."
-  },
-  {
-    "id": 24,
-    "email": "Your application is very slow, and I would like to know if this is a known issue.",
-    "expected_category": "technical",
-    "expected_summary": "Customer reports slow application performance and asks whether it is a known issue."
-  },
-  
-  {
-    "id": 25,
-    "email": "I subscribed to your premium plan last week. Today I noticed two payments were deducted from my bank account for the same subscription. Please check the duplicate transaction and refund the extra amount.",
-    "expected_category": "billing",
-    "expected_summary": "Customer was charged twice for the same premium subscription and requests a refund of the duplicate payment."
-  },
-  {
-    "id": 26,
-    "email": "I recently changed my phone number and now I cannot access my account. The login page keeps asking me to verify using my old number, which I no longer have. Please help me update my account recovery details.",
-    "expected_category": "account",
-    "expected_summary": "Customer cannot access their account because verification is linked to an old phone number."
-  },
-  {
-    "id": 27,
-    "email": "Whenever I open the application, it takes almost a minute to load. Sometimes the screen freezes, and when I try to upload a document, the application closes unexpectedly. This started happening after the latest update.",
-    "expected_category": "technical",
-    "expected_summary": "Customer reports slow loading, freezing, and unexpected crashes when uploading documents after a recent application update."
-  },
-  {
-    "id": 28,
+    "id": 16,
     "email": "I purchased a yearly subscription three weeks ago, but the service did not meet my expectations. I contacted support earlier and was told that my refund would be processed within five business days. It has now been two weeks, and I still haven't received the money. Could you please check the refund status?",
     "expected_category": "billing",
     "expected_summary": "Customer has not received the promised refund for their yearly subscription and requests a status update."
   },
   {
-    "id": 29,
+    "id": 17,
+    "email": "I requested a refund five days ago, but the money has not arrived.",
+    "expected_category": "billing",
+    "expected_summary": "Customer has not received their requested refund."
+  },
+  {
+    "id": 18,
+    "email": "whr can i find ur support timings??",
+    "expected_category": "general",
+    "expected_summary": "Customer wants to know the customer support working hours."
+  },
+  {
+    "id": 19,
+    "email": "I want to cancel my subscription because the application keeps crashing.",
+    "expected_category": "technical",
+    "expected_summary": "Customer wants to cancel their subscription because the application repeatedly crashes."
+  },
+  {
+    "id": 20,
     "email": "I have been trying to update my account details for the past two days. The profile page allows me to enter a new email address, but after clicking save, it returns to the old address. I also tried logging out and logging back in, but nothing changed.",
     "expected_category": "account",
     "expected_summary": "Customer cannot update their account email address because the profile continues to revert to the old address."
   },
+
   {
-    "id": 30,
+    "id": 21,
+    "email": "My account has been locked and I cannot sign in.",
+    "expected_category": "account",
+    "expected_summary": "Customer is unable to sign in because their account is locked."
+  },
+  {
+    "id": 22,
+    "email": "refund not recived yet its been 1 week",
+    "expected_category": "billing",
+    "expected_summary": "Customer has not received their refund after one week."
+  },
+  {
+    "id": 23,
+    "email": "Can you explain why my account was charged after I cancelled my plan?",
+    "expected_category": "billing",
+    "expected_summary": "Customer reports being charged after cancelling their subscription."
+  },
+  {
+    "id": 24,
     "email": "I have a question about your application's latest version. Since installing the update yesterday, the application has become extremely slow and frequently displays an unexpected error. Is there a way to fix this without reinstalling the application?",
     "expected_category": "technical",
     "expected_summary": "Customer experiences slow performance and unexpected errors after the latest application update and asks how to fix them."
+  },
+  {
+    "id": 25,
+    "email": "I would like to suggest adding a dark mode to your application.",
+    "expected_category": "general",
+    "expected_summary": "Customer suggests adding a dark mode to the application."
+  },
+  {
+    "id": 26,
+    "email": "My invoice shows an incorrect amount for this month.",
+    "expected_category": "billing",
+    "expected_summary": "Customer reports an incorrect amount on their invoice."
+  },
+  {
+    "id": 27,
+    "email": "I updated my profile, but the application still displays my old email address.",
+    "expected_category": "account",
+    "expected_summary": "Customer's profile continues to display their old email address after an update."
+  },
+  {
+    "id": 28,
+    "email": "I want to update the email address associated with my profile.",
+    "expected_category": "account",
+    "expected_summary": "Customer wants to change the email address linked to their profile."
+  },
+  {
+    "id": 29,
+    "email": "Your application is very slow, and I would like to know if this is a known issue.",
+    "expected_category": "technical",
+    "expected_summary": "Customer reports slow application performance and asks whether it is a known issue."
+  },
+  {
+    "id": 30,
+    "email": "I receive an error message whenever I try to upload a file.",
+    "expected_category": "technical",
+    "expected_summary": "Customer encounters an error when attempting to upload a file."
   }
-
-
-
 ]
+

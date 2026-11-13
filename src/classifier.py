@@ -1,22 +1,12 @@
+
 import json
-import os
-from dotenv import load_dotenv
-from groq import Groq
-
-from config import load_prompt_config
-
-load_dotenv()
-
-config = load_prompt_config("prompts/v1.yaml")
-
-api_key = os.getenv("GROQ_API_KEY")
-
-client = Groq(api_key=api_key)
+import time
 
 
-def classify_email(email):
+async def classify_email(email, config, client):
+    start_time = time.perf_counter()
 
-    response = client.chat.completions.create(
+    response = await client.chat.completions.create(
         model=config.model,
         messages=[
             {"role": "system", "content": config.system_prompt},
@@ -25,5 +15,32 @@ def classify_email(email):
         temperature=config.temperature,
     )
 
-    result = response.choices[0].message.content
-    return json.loads(result)
+    latency_ms = round(
+        (time.perf_counter() - start_time) * 1000, 2
+    )
+
+    raw_output = response.choices[0].message.content or ""
+
+    try:
+        parsed_output = json.loads(raw_output)
+        error = None
+
+    except json.JSONDecodeError as exc:
+        parsed_output = None
+        error = f"Invalid JSON: {exc}"
+
+    usage = response.usage
+
+    token_usage = {
+        "prompt_tokens": usage.prompt_tokens if usage else None,
+        "completion_tokens": usage.completion_tokens if usage else None,
+        "total_tokens": usage.total_tokens if usage else None
+    }
+
+    return {
+        "raw_output": raw_output,
+        "parsed_output": parsed_output,
+        "error": error,
+        "latency_ms": latency_ms,
+        "token_usage": token_usage
+    }
