@@ -1,0 +1,6 @@
+{
+  "rolling_window": 7,
+  "minimum_runs": 7,
+  "drift_threshold_percent": 92.0,
+  "send_pass_notifications": false
+}

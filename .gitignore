@@ -1,3 +1,29 @@
+
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
+
+# Python virtual environment
 venv/
+.venv/
+
+# Python cache
 __pycache__/
+*.py[cod]
+.pytest_cache/
+
+# IDE and OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+
+# Generated evaluation outputs
+evaluations/*.json
+
+# Generated HTML dashboards
+reports/*.html

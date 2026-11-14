@@ -14,15 +14,22 @@ from config import load_prompt_config
 load_dotenv()
 
 # Load prompt configuration
-config = load_prompt_config("prompts/v1.yaml")
+config = load_prompt_config("prompts/v2.yaml")
 
-# Load golden dataset
-with open(
-    "datasets/golden_dataset_v3.json",
-    "r",
-    encoding="utf-8"
-) as file:
+# Load Dataset v3 directly (already uses the evaluator's expected schema).
+DATASET_PATH = "datasets/golden_dataset_v3.json"
+
+with open(DATASET_PATH, "r", encoding="utf-8") as file:
     dataset = json.load(file)
+
+if not isinstance(dataset, dict) or not isinstance(dataset.get("test_cases"), list):
+    raise ValueError("Dataset v3 must contain a test_cases list.")
+
+for case in dataset["test_cases"]:
+    if not all(key in case for key in ("id", "input", "expected_output")):
+        raise ValueError(f"Dataset v3 case missing required fields: {case!r}")
+    if not isinstance(case["expected_output"], dict) or "category" not in case["expected_output"]:
+        raise ValueError(f"Dataset v3 case has no expected category: {case['id']}")
 
 
 # Generate fingerprint for prompt configuration and dataset
@@ -163,14 +170,14 @@ async def evaluate_case(test_case, config, client):
 async def run_evaluation(config, dataset):
     test_cases = dataset["test_cases"]
 
-    selected_cases = test_cases[:3]
+    selected_cases = test_cases
 
     batch_size = 3
     batch_delay = 20
 
-    # Keep the existing completed 30-case checkpoint
+    # Dedicated Dataset v3 checkpoint; do not overwrite Dataset v1/v2.
     output_path = (
-        "evaluations/v1_dataset_v3_30_checkpoint.json"
+        "evaluations/v2_dataset_v3_30_checkpoint.json"
     )
     fingerprint = create_fingerprint(config, dataset)
 

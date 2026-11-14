@@ -1,0 +1,84 @@
+
+name: LLM Regression CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-validation:
+    name: Offline Regression Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate baseline checkpoint
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("baselines/v1_dataset_v3_30_checkpoint.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          rows = data["results"]
+          ids = [str(row["test_id"]) for row in rows]
+
+          assert len(rows) == 30, "Expected 30 baseline cases"
+          assert len(set(ids)) == 30, "Duplicate test IDs detected"
+
+          print("Baseline validation passed: 30 unique cases")
+          PY
+
+      - name: Compile Python source files
+        run: |
+          python -m compileall -q src
+
+      - name: Test monitoring drift detection
+        run: |
+          python - <<'PY'
+          from src.monitoring import evaluate_drift
+
+          def history(scores):
+              return [
+                  {
+                      "run_id": str(i),
+                      "dataset_id": "v3",
+                      "total_cases": 30,
+                      "accuracy_percent": score,
+                  }
+                  for i, score in enumerate(scores, 1)
+              ]
+
+          stable = evaluate_drift(
+              history([100, 98, 97, 95, 93, 90, 88]),
+              7, 92.0, 7
+          )
+          assert stable["status"] == "STABLE"
+
+          drifting = evaluate_drift(
+              history([96, 94, 91, 89, 87, 85, 82]),
+              7, 92.0, 7
+          )
+          assert drifting["status"] == "SLOW_DRIFT"
+
+          insufficient = evaluate_drift(
+              history([96, 94, 90]),
+              7, 92.0, 7
+          )
+          assert insufficient["status"] == "INSUFFICIENT_HISTORY"
+
+          print("All three drift tests passed")
+          PY
