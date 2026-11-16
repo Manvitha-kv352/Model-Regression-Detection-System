@@ -1,0 +1,384 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Model Regression Detection | Evaluation Evidence</title><style>
+:root{--bg:#0b1020;--surface:#151d32;--surface2:#1d2942;--text:#eef2ff;--muted:#a6b4cf;--accent:#91a5ff;--good:#34d399;--bad:#fb7185;--warn:#fbbf24;--border:#2a3651}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.55 Inter,Segoe UI,Arial,sans-serif}.container{max-width:1280px;margin:auto;padding:34px 24px 70px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:26px}h1{font-size:30px;line-height:1.2;margin:6px 0}h2{font-size:19px;margin:0 0 16px}.eyebrow{color:var(--accent);font-weight:750;letter-spacing:2px;font-size:11px}.muted,.sub{color:var(--muted)}.sub{display:block;font-size:12px;margin-top:3px}.small{font-size:12px}.pill,.tag{border-radius:99px;padding:6px 11px;background:var(--surface2);font-size:12px;display:inline-block}.pill{color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card,.panel{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:22px}.card .label{font-size:12px;color:var(--muted)}.card .value{font-size:29px;font-weight:800;margin:7px 0 3px}.panel{margin-top:20px}.good{color:var(--good)!important}.bad{color:var(--bad)!important}.warn{color:var(--warn)!important}.tag.good{background:#123c34}.tag.bad{background:#44202d}.tag.warn{background:#44341d}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:740px}th,td{text-align:left;border-bottom:1px solid var(--border);padding:12px 10px;vertical-align:top}th{font-size:12px;color:var(--muted)}tr:last-child td{border-bottom:0}.comparison-bars{min-width:120px}.bar{height:8px;border-radius:10px;margin:5px 0}.baseline{background:#6776a2}.candidate{background:var(--accent)}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 12px}.dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}input,select,button{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px;font:inherit}input{flex:1;min-width:210px}button{cursor:pointer}details{min-width:130px}summary{cursor:pointer;color:var(--accent)}.evidence{padding:14px;margin-top:8px;background:var(--surface2);border-radius:10px;min-width:260px;max-width:500px;overflow-wrap:anywhere}.evidence p{margin:3px 0 13px}.decision{border-left:4px solid var(--warn)}.note{font-size:12px;color:var(--muted);margin-top:14px}footer{text-align:center;color:var(--muted);font-size:12px;margin-top:35px}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.grid{grid-template-columns:1fr}.container{padding:20px 12px}h1{font-size:25px}}@media print{body{background:white;color:black}.card,.panel{background:white;color:black;border-color:#ccc}.controls{display:none}.sub,.muted{color:#555}}
+</style></head><body><div class="container"><header><div><div class="eyebrow">AI QUALITY ENGINEERING · EVALUATION EVIDENCE</div><h1>Model Regression Detection</h1><div class="muted">Customer support email classification · Same golden dataset comparison</div></div><div><span class="pill">Baseline v1 → Candidate v2 · Dataset v3</span><div class="sub">Generated: 2026-11-16 09:09 UTC</div></div></header>
+<section class="grid"><div class="card"><div class="label">Baseline accuracy</div><div class="value ">96.67%</div><div class="sub">29/30 passed</div></div><div class="card"><div class="label">Candidate accuracy</div><div class="value ">96.67%</div><div class="sub">29/30 passed</div></div><div class="card"><div class="label">Overall change</div><div class="value ">+0.00 pp</div><div class="sub">Percentage points</div></div><div class="card"><div class="label">Regressions</div><div class="value bad">1</div><div class="sub">PASS → FAIL</div></div><div class="card"><div class="label">Improvements</div><div class="value good">1</div><div class="sub">FAIL → PASS</div></div><div class="card"><div class="label">Error transitions</div><div class="value ">0</div><div class="sub">Investigate separately</div></div></section><section class="panel decision"><h2>Release review · REVIEW REQUIRED</h2><p>1 case regression(s) and 0 error transition(s) detected. Overall accuracy alone does not establish release safety.</p><div class="sub">Recommendation based on observed case-level transitions, not a configured production release gate.</div></section>
+<section class="panel"><h2>Accuracy by category</h2><div class="legend"><span><i class="dot" style="background:#6776a2"></i>Baseline</span><span><i class="dot" style="background:var(--accent)"></i>Candidate</span></div><div class="table-wrap"><table><thead><tr><th>Category</th><th>Baseline</th><th>Candidate</th><th>Delta</th><th>Visual comparison</th></tr></thead><tbody><tr><td><strong>Account</strong><span class="sub">9 cases</span></td>
+        <td>100.00%</td><td>88.89%</td><td class="bad">-11.11 pp</td>
+        <td><div class="comparison-bars"><div class="bar baseline" style="width:100.00%"></div><div class="bar candidate" style="width:88.89%"></div></div></td></tr><tr><td><strong>Billing</strong><span class="sub">11 cases</span></td>
+        <td>90.91%</td><td>100.00%</td><td class="good">+9.09 pp</td>
+        <td><div class="comparison-bars"><div class="bar baseline" style="width:90.91%"></div><div class="bar candidate" style="width:100.00%"></div></div></td></tr><tr><td><strong>General</strong><span class="sub">2 cases</span></td>
+        <td>100.00%</td><td>100.00%</td><td class="muted">+0.00 pp</td>
+        <td><div class="comparison-bars"><div class="bar baseline" style="width:100.00%"></div><div class="bar candidate" style="width:100.00%"></div></div></td></tr><tr><td><strong>Technical</strong><span class="sub">8 cases</span></td>
+        <td>100.00%</td><td>100.00%</td><td class="muted">+0.00 pp</td>
+        <td><div class="comparison-bars"><div class="bar baseline" style="width:100.00%"></div><div class="bar candidate" style="width:100.00%"></div></div></td></tr></tbody></table></div></section>
+<section class="panel"><h2>Operational metrics</h2><div class="table-wrap"><table><thead><tr><th>Metric</th><th>Baseline</th><th>Candidate</th></tr></thead><tbody><tr><td>Average latency</td><td>801.41 ms</td><td>935.65 ms</td></tr>
+    <tr><td>Total classifier tokens</td><td>10,455</td><td>15,981</td></tr>
+    <tr><td>Summary relevance</td><td>Not recorded (0 judged)</td><td>Not recorded (0 judged)</td></tr></tbody></table></div><div class="note">Latency is the mean of recorded per-case values. Token totals are displayed only if all cases have usage. Summary relevance is displayed only if scores exist in the loaded checkpoints; classifier results alone do not include judge scores.</div></section>
+<section class="panel"><h2>Case-level regression explorer</h2><p class="muted">Search by test ID, email text or category. Expand a case to inspect the actual model outputs and request metrics.</p><div class="controls"><input id="search" type="search" placeholder="Search cases, e.g. TC023 or billing" aria-label="Search test cases"><select id="filter" aria-label="Filter by transition"><option value="all">All cases</option><option value="regression">Regressions</option><option value="improvement">Improvements</option><option value="unchanged">Unchanged</option><option value="error-transition">Error transitions</option></select><button type="button" onclick="window.print()">Print / Save as PDF</button></div><div class="sub" id="visibleCount"></div><div class="table-wrap"><table><thead><tr><th>Case</th><th>Expected</th><th>Baseline</th><th>Candidate</th><th>Transition</th><th>Evidence</th></tr></thead><tbody><tr class="case-row" data-filter="unchanged" data-search="tc001 i would like to suggest adding a dark mode to your application. general general general">
+          <td><strong>TC001</strong></td><td>general</td>
+          <td>general<span class="sub good">PASS</span></td>
+          <td>general<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I would like to suggest adding a dark mode to your application.</p>
+          <strong>Expected category</strong><p>general</p>
+          <strong>Baseline summary</strong><p>Customer suggests adding a dark mode feature to the application.</p>
+          <strong>Candidate summary</strong><p>The customer suggests adding a dark mode to the application.</p>
+          <strong>Baseline latency / tokens</strong><p>1,148.15 ms / 342</p>
+          <strong>Candidate latency / tokens</strong><p>1,542.67 ms / 524</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="improvement" data-search="tc002 i want to cancel my subscription because the application keeps crashing. billing technical billing">
+          <td><strong>TC002</strong></td><td>billing</td>
+          <td>technical<span class="sub bad">FAIL</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag good">Improvement</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I want to cancel my subscription because the application keeps crashing.</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>The customer reports that the application keeps crashing and wants to cancel their subscription.</p>
+          <strong>Candidate summary</strong><p>Customer wants to cancel their subscription because the application keeps crashing.</p>
+          <strong>Baseline latency / tokens</strong><p>1,149.41 ms / 398</p>
+          <strong>Candidate latency / tokens</strong><p>1,344.68 ms / 529</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc003 my account has been locked and i cannot sign in. account account account">
+          <td><strong>TC003</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>My account has been locked and I cannot sign in.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>The customer reports that their account is locked and they cannot sign in.</p>
+          <strong>Candidate summary</strong><p>Customer’s account is locked and they cannot sign in.</p>
+          <strong>Baseline latency / tokens</strong><p>1,082.49 ms / 333</p>
+          <strong>Candidate latency / tokens</strong><p>1,070.47 ms / 501</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc004 can you explain why my account was charged after i cancelled my plan? billing billing billing">
+          <td><strong>TC004</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>Can you explain why my account was charged after I cancelled my plan?</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer was charged after canceling their plan and is asking for an explanation.</p>
+          <strong>Candidate summary</strong><p>Customer is asking why they were charged after canceling their plan.</p>
+          <strong>Baseline latency / tokens</strong><p>1,243.37 ms / 355</p>
+          <strong>Candidate latency / tokens</strong><p>494.36 ms / 529</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc005 i receive an error message whenever i try to upload a file. technical technical technical">
+          <td><strong>TC005</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I receive an error message whenever I try to upload a file.</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>Customer reports an error when attempting to upload a file.</p>
+          <strong>Candidate summary</strong><p>Customer reports an error message when attempting to upload a file.</p>
+          <strong>Baseline latency / tokens</strong><p>984.34 ms / 336</p>
+          <strong>Candidate latency / tokens</strong><p>686.48 ms / 507</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc006 my payment was successful, but my premium subscription is still inactive. billing billing billing">
+          <td><strong>TC006</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>My payment was successful, but my premium subscription is still inactive.</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer paid successfully but subscription remains inactive.</p>
+          <strong>Candidate summary</strong><p>User paid successfully but their premium subscription remains inactive and they need it activated.</p>
+          <strong>Baseline latency / tokens</strong><p>981.07 ms / 345</p>
+          <strong>Candidate latency / tokens</strong><p>705.67 ms / 522</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc007 i want to update the email address associated with my profile. account account account">
+          <td><strong>TC007</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I want to update the email address associated with my profile.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Customer wants to update the email address associated with their profile.</p>
+          <strong>Candidate summary</strong><p>Customer wants to update the email address associated with their profile.</p>
+          <strong>Baseline latency / tokens</strong><p>841.52 ms / 338</p>
+          <strong>Candidate latency / tokens</strong><p>689.93 ms / 492</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc008 i need 2 chang my email adress on profile account account account">
+          <td><strong>TC008</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>i need 2 chang my email adress on profile</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Customer wants to change their email address on their profile.</p>
+          <strong>Candidate summary</strong><p>The customer wants to change their email address on their profile.</p>
+          <strong>Baseline latency / tokens</strong><p>739.67 ms / 330</p>
+          <strong>Candidate latency / tokens</strong><p>635.64 ms / 507</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc009 i forgot my password and cannot log into my account. account account account">
+          <td><strong>TC009</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I forgot my password and cannot log into my account.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Forgot password and cannot log into account.</p>
+          <strong>Candidate summary</strong><p>The customer forgot their password and cannot log into their account.</p>
+          <strong>Baseline latency / tokens</strong><p>638.18 ms / 316</p>
+          <strong>Candidate latency / tokens</strong><p>631.60 ms / 503</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc010 i purchased a yearly subscription three weeks ago, but the service did not meet my expectations. i contacted support earlier and was told that my refund would be processed within five business days. it has now been two weeks, and i still haven&#x27;t received the money. could you please check the refund status? billing billing billing">
+          <td><strong>TC010</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I purchased a yearly subscription three weeks ago, but the service did not meet my expectations. I contacted support earlier and was told that my refund would be processed within five business days. It has now been two weeks, and I still haven&#x27;t received the money. Could you please check the refund status?</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer is awaiting a refund for a yearly subscription that has not yet been processed.</p>
+          <strong>Candidate summary</strong><p>Customer requests to check the status of a refund for a yearly subscription purchased three weeks ago.</p>
+          <strong>Baseline latency / tokens</strong><p>609.48 ms / 364</p>
+          <strong>Candidate latency / tokens</strong><p>1,163.97 ms / 613</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc011 hi i paid 4 premium yesterday but its still showing free plan?? money got deducted pls fix billing billing billing">
+          <td><strong>TC011</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>hi i paid 4 premium yesterday but its still showing free plan?? money got deducted pls fix</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer paid for a premium plan but their account still shows the free plan and requests a resolution.</p>
+          <strong>Candidate summary</strong><p>User paid for a premium plan but their account still shows the free plan and requests it be updated.</p>
+          <strong>Baseline latency / tokens</strong><p>714.21 ms / 364</p>
+          <strong>Candidate latency / tokens</strong><p>1,230.50 ms / 575</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc012 i can sign in normally, but the settings page freezes whenever i try to change my notification preferences. is something wrong with my account? technical technical technical">
+          <td><strong>TC012</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I can sign in normally, but the settings page freezes whenever I try to change my notification preferences. Is something wrong with my account?</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>Settings page freezes when trying to change notification preferences.</p>
+          <strong>Candidate summary</strong><p>User reports that the settings page freezes when trying to change notification preferences and asks if there is an account issue.</p>
+          <strong>Baseline latency / tokens</strong><p>674.79 ms / 375</p>
+          <strong>Candidate latency / tokens</strong><p>1,160.51 ms / 584</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc013 i received my refund, but the refunded amount is less than what i paid. billing billing billing">
+          <td><strong>TC013</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I received my refund, but the refunded amount is less than what I paid.</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer received a refund that is less than the amount they originally paid.</p>
+          <strong>Candidate summary</strong><p>Customer received a refund that is less than the amount paid and is seeking clarification or adjustment.</p>
+          <strong>Baseline latency / tokens</strong><p>540.64 ms / 345</p>
+          <strong>Candidate latency / tokens</strong><p>598.90 ms / 542</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc014 i have been trying to update my account details for the past two days. the profile page allows me to enter a new email address, but after clicking save, it returns to the old address. i also tried logging out and logging back in, but nothing changed. account account account">
+          <td><strong>TC014</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I have been trying to update my account details for the past two days. The profile page allows me to enter a new email address, but after clicking save, it returns to the old address. I also tried logging out and logging back in, but nothing changed.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Customer cannot update their email address in their account profile.</p>
+          <strong>Candidate summary</strong><p>User cannot update their email address on the profile page and requests help to resolve the issue.</p>
+          <strong>Baseline latency / tokens</strong><p>804.89 ms / 378</p>
+          <strong>Candidate latency / tokens</strong><p>778.12 ms / 550</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc015 what are your customer support working hours? general general general">
+          <td><strong>TC015</strong></td><td>general</td>
+          <td>general<span class="sub good">PASS</span></td>
+          <td>general<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>What are your customer support working hours?</p>
+          <strong>Expected category</strong><p>general</p>
+          <strong>Baseline summary</strong><p>Customer inquires about the customer support working hours.</p>
+          <strong>Candidate summary</strong><p>The customer is asking about the customer support working hours.</p>
+          <strong>Baseline latency / tokens</strong><p>754.20 ms / 327</p>
+          <strong>Candidate latency / tokens</strong><p>728.93 ms / 510</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc016 my app keeps crshing wen i open it technical technical technical">
+          <td><strong>TC016</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>my app keeps crshing wen i open it</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>The customer reports that the app crashes when they open it.</p>
+          <strong>Candidate summary</strong><p>The user reports that the app crashes when opened.</p>
+          <strong>Baseline latency / tokens</strong><p>732.33 ms / 323</p>
+          <strong>Candidate latency / tokens</strong><p>717.87 ms / 506</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc017 i have a question about your application&#x27;s latest version. since installing the update yesterday, the application has become extremely slow and frequently displays an unexpected error. is there a way to fix this without reinstalling the application? technical technical technical">
+          <td><strong>TC017</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I have a question about your application&#x27;s latest version. Since installing the update yesterday, the application has become extremely slow and frequently displays an unexpected error. Is there a way to fix this without reinstalling the application?</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>User reports that after updating, the app is slow and shows errors, and asks for a fix without reinstalling.</p>
+          <strong>Candidate summary</strong><p>Customer reports that after the latest update the app is slow and shows errors, and asks for a fix without reinstalling.</p>
+          <strong>Baseline latency / tokens</strong><p>629.56 ms / 420</p>
+          <strong>Candidate latency / tokens</strong><p>1,074.44 ms / 609</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc018 i forgot my password, and the reset link keeps showing an error. account account account">
+          <td><strong>TC018</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I forgot my password, and the reset link keeps showing an error.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Customer is unable to reset their password because the reset link shows an error.</p>
+          <strong>Candidate summary</strong><p>Customer forgot password and reset link shows an error, requesting help to reset it.</p>
+          <strong>Baseline latency / tokens</strong><p>760.78 ms / 339</p>
+          <strong>Candidate latency / tokens</strong><p>956.97 ms / 510</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc019 i recently changed my phone number and now i cannot access my account. the login page keeps asking me to verify using my old number, which i no longer have. please help me update my account recovery details. account account account">
+          <td><strong>TC019</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I recently changed my phone number and now I cannot access my account. The login page keeps asking me to verify using my old number, which I no longer have. Please help me update my account recovery details.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Customer cannot log in because the account still requires verification with an old phone number.</p>
+          <strong>Candidate summary</strong><p>User cannot log in because the account recovery still uses an old phone number and requests help updating recovery details.</p>
+          <strong>Baseline latency / tokens</strong><p>830.44 ms / 349</p>
+          <strong>Candidate latency / tokens</strong><p>866.42 ms / 575</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc020 your application is very slow, and i would like to know if this is a known issue. technical technical technical">
+          <td><strong>TC020</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>Your application is very slow, and I would like to know if this is a known issue.</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>Customer reports that the application is very slow and asks if it is a known issue.</p>
+          <strong>Candidate summary</strong><p>Customer reports the application is very slow and asks if this is a known issue.</p>
+          <strong>Baseline latency / tokens</strong><p>828.69 ms / 359</p>
+          <strong>Candidate latency / tokens</strong><p>731.58 ms / 528</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc021 refund not recived yet its been 1 week billing billing billing">
+          <td><strong>TC021</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>refund not recived yet its been 1 week</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer has not received a refund after one week.</p>
+          <strong>Candidate summary</strong><p>Customer is awaiting a refund that hasn&#x27;t been received after one week.</p>
+          <strong>Baseline latency / tokens</strong><p>828.43 ms / 335</p>
+          <strong>Candidate latency / tokens</strong><p>730.07 ms / 510</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc022 the application crashes every time i try to open it. technical technical technical">
+          <td><strong>TC022</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>The application crashes every time I try to open it.</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>The application crashes when attempting to open it.</p>
+          <strong>Candidate summary</strong><p>The user reports that the application crashes every time they try to open it.</p>
+          <strong>Baseline latency / tokens</strong><p>842.43 ms / 320</p>
+          <strong>Candidate latency / tokens</strong><p>1,043.78 ms / 511</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="regression" data-search="tc023 i updated my profile, but the application still displays my old email address. account account technical">
+          <td><strong>TC023</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub bad">FAIL</span></td>
+          <td><span class="tag bad">Regression</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I updated my profile, but the application still displays my old email address.</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>User updated profile but the application still shows the old email address.</p>
+          <strong>Candidate summary</strong><p>User updated profile but app still shows old email address, requesting a fix.</p>
+          <strong>Baseline latency / tokens</strong><p>893.12 ms / 342</p>
+          <strong>Candidate latency / tokens</strong><p>984.02 ms / 540</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc024 whenever i open the application, it takes almost a minute to load. sometimes the screen freezes, and when i try to upload a document, the application closes unexpectedly. this started happening after the latest update. technical technical technical">
+          <td><strong>TC024</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>Whenever I open the application, it takes almost a minute to load. Sometimes the screen freezes, and when I try to upload a document, the application closes unexpectedly. This started happening after the latest update.</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>The user reports that the application loads slowly, freezes, and crashes when uploading documents after the latest update.</p>
+          <strong>Candidate summary</strong><p>User reports slow loading, freezes, and crashes after the latest update, requesting a fix.</p>
+          <strong>Baseline latency / tokens</strong><p>751.30 ms / 420</p>
+          <strong>Candidate latency / tokens</strong><p>982.54 ms / 576</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc025 i requested a refund five days ago, but the money has not arrived. billing billing billing">
+          <td><strong>TC025</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I requested a refund five days ago, but the money has not arrived.</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer is waiting for a refund that hasn&#x27;t arrived yet.</p>
+          <strong>Candidate summary</strong><p>Customer is awaiting a refund that hasn&#x27;t arrived after five days.</p>
+          <strong>Baseline latency / tokens</strong><p>619.71 ms / 339</p>
+          <strong>Candidate latency / tokens</strong><p>781.29 ms / 510</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc026 hey i cant loggin to my acount plz help me asap account account account">
+          <td><strong>TC026</strong></td><td>account</td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td>account<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>hey i cant loggin to my acount plz help me asap</p>
+          <strong>Expected category</strong><p>account</p>
+          <strong>Baseline summary</strong><p>Customer cannot log in to their account and needs assistance.</p>
+          <strong>Candidate summary</strong><p>Customer cannot log in to their account and requests assistance.</p>
+          <strong>Baseline latency / tokens</strong><p>710.37 ms / 330</p>
+          <strong>Candidate latency / tokens</strong><p>733.39 ms / 502</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc027 i was charged twice for my monthly subscription. billing billing billing">
+          <td><strong>TC027</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I was charged twice for my monthly subscription.</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer was charged twice for their monthly subscription.</p>
+          <strong>Candidate summary</strong><p>Customer was charged twice for their monthly subscription and is requesting a correction.</p>
+          <strong>Baseline latency / tokens</strong><p>678.90 ms / 326</p>
+          <strong>Candidate latency / tokens</strong><p>859.92 ms / 502</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc028 i can log in, but my account dashboard shows an error every time. technical technical technical">
+          <td><strong>TC028</strong></td><td>technical</td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td>technical<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I can log in, but my account dashboard shows an error every time.</p>
+          <strong>Expected category</strong><p>technical</p>
+          <strong>Baseline summary</strong><p>Customer can log in but encounters an error on the account dashboard.</p>
+          <strong>Candidate summary</strong><p>User can log in but encounters an error on the account dashboard and requests a fix.</p>
+          <strong>Baseline latency / tokens</strong><p>859.40 ms / 344</p>
+          <strong>Candidate latency / tokens</strong><p>1,303.47 ms / 553</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc029 u charged me 2 times for dis month billing billing billing">
+          <td><strong>TC029</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>u charged me 2 times for dis month</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer reports being charged twice for the month.</p>
+          <strong>Candidate summary</strong><p>Customer reports being charged twice for the month and requests a correction.</p>
+          <strong>Baseline latency / tokens</strong><p>641.29 ms / 323</p>
+          <strong>Candidate latency / tokens</strong><p>1,539.41 ms / 506</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr><tr class="case-row" data-filter="unchanged" data-search="tc030 i subscribed to your premium plan last week. today i noticed two payments were deducted from my bank account for the same subscription. please check the duplicate transaction and refund the extra amount. billing billing billing">
+          <td><strong>TC030</strong></td><td>billing</td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td>billing<span class="sub good">PASS</span></td>
+          <td><span class="tag muted">Unchanged</span></td>
+          <td><details><summary>Inspect evidence</summary><div class="evidence"><strong>Customer email</strong><p>I subscribed to your premium plan last week. Today I noticed two payments were deducted from my bank account for the same subscription. Please check the duplicate transaction and refund the extra amount.</p>
+          <strong>Expected category</strong><p>billing</p>
+          <strong>Baseline summary</strong><p>Customer reports a duplicate charge for their premium subscription and requests a refund.</p>
+          <strong>Candidate summary</strong><p>Customer reports duplicate payment for premium subscription and requests a refund.</p>
+          <strong>Baseline latency / tokens</strong><p>529.28 ms / 340</p>
+          <strong>Candidate latency / tokens</strong><p>1,302.03 ms / 555</p>
+          <strong>Errors</strong><p>Baseline: — | Candidate: —</p>
+          </div></details></td></tr></tbody></table></div></section>
+<section class="panel"><h2>Evidence and reproducibility</h2><p>Every figure on this page is computed from saved evaluation outputs. This HTML is a generated snapshot; regenerate it after a new comparison run.</p><div class="small"><p><strong>Baseline:</strong> <code>evaluations/v1_dataset_v3_30_checkpoint.json</code></p><p><strong>Candidate:</strong> <code>evaluations/v2_dataset_v3_30_checkpoint.json</code></p><p><strong>Golden dataset:</strong> <code>datasets/golden_dataset_v3.json</code></p><p><strong>Comparison:</strong> <code>evaluations/regression_diff.json</code></p></div><p class="note">Dataset provenance limitation: legacy checkpoints store fingerprints but not full dataset snapshots. Archive the exact dataset and prompt configuration used in each evaluation for stronger auditability. Results on 30 test cases do not establish production-wide accuracy.</p></section>
+<footer>Model Regression Detection System · Offline report · No API requests</footer></div><script>
+const search=document.getElementById('search'),filter=document.getElementById('filter'),rows=[...document.querySelectorAll('.case-row')];function applyFilters(){const q=search.value.trim().toLowerCase(),f=filter.value;let shown=0;for(const row of rows){const visible=(f==='all'||row.dataset.filter===f)&&row.dataset.search.includes(q);row.hidden=!visible;if(visible)shown++}document.getElementById('visibleCount').textContent=shown+' of '+rows.length+' cases shown'}search.addEventListener('input',applyFilters);filter.addEventListener('change',applyFilters);applyFilters();
+</script></body></html>
