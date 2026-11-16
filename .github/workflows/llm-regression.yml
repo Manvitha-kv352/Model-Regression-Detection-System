@@ -81,10 +81,68 @@ jobs:
           assert drifting["status"] == "SLOW_DRIFT"
 
           insufficient = evaluate_drift(
-              history([96, 94, 90]),
-              7, 92.0, 7
+              history([96, 94, 90]), 7, 92.0, 7
           )
           assert insufficient["status"] == "INSUFFICIENT_HISTORY"
 
           print("All three drift tests passed")
           PY
+
+  live-evaluation:
+    name: Live Groq Evaluation
+    if: github.event_name == 'workflow_dispatch'
+    needs: offline-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip check
+
+      - name: Run 30-case LLM evaluation
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          EVALUATION_CHECKPOINT_PATH: evaluations/ci_v2_checkpoint.json
+        run: |
+          mkdir -p evaluations
+          python src/evaluation_runner.py
+
+      - name: Verify evaluation checkpoint
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("evaluations/ci_v2_checkpoint.json")
+          assert path.is_file(), "CI evaluation checkpoint missing"
+
+          data = json.loads(path.read_text(encoding="utf-8"))
+          rows = data["results"]
+          ids = [str(row["test_id"]) for row in rows]
+
+          assert len(rows) == 30, f"Expected 30 cases, got {len(rows)}"
+          assert len(set(ids)) == 30, "Duplicate test IDs detected"
+
+          print("Live evaluation completed: 30 unique cases")
+          PY
+
+      - name: Upload evaluation checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-evaluation-results
+          path: evaluations/ci_v2_checkpoint.json
+          if-no-files-found: warn
+          retention-days: 7
