@@ -175,9 +175,12 @@ async def run_evaluation(config, dataset):
     batch_size = 3
     batch_delay = 20
 
-    # Dedicated Dataset v3 checkpoint; do not overwrite Dataset v1/v2.
-    output_path = (
-        "evaluations/v2_dataset_v3_30_checkpoint.json"
+   # Dedicated Dataset v3 checkpoint.
+    # Allow CI to use a separate checkpoint without changing local results.
+    output_path = os.getenv(
+          "EVALUATION_CHECKPOINT_PATH",
+          "evaluations/v2_dataset_v3_30_checkpoint.json"
+
     )
     fingerprint = create_fingerprint(config, dataset)
 
