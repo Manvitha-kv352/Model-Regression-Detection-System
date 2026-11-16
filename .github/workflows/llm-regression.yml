@@ -138,11 +138,30 @@ jobs:
           print("Live evaluation completed: 30 unique cases")
           PY
 
-      - name: Upload evaluation checkpoint
+      - name: Compare baseline and candidate
+        run: |
+          python src/regression_comparator.py \
+            --baseline baselines/v1_dataset_v3_30_checkpoint.json \
+            --candidate evaluations/ci_v2_checkpoint.json \
+            --baseline-dataset datasets/golden_dataset_v3.json \
+            --candidate-dataset datasets/golden_dataset_v3.json \
+            --output evaluations/ci_regression_comparison.json
+
+      - name: Run quality gate
+        run: |
+          python src/quality_gate.py \
+            --baseline baselines/v1_dataset_v3_30_checkpoint.json \
+            --candidate evaluations/ci_v2_checkpoint.json \
+            --output evaluations/ci_quality_gate.json
+
+      - name: Upload evaluation artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: live-evaluation-results
-          path: evaluations/ci_v2_checkpoint.json
+          path: |
+            evaluations/ci_v2_checkpoint.json
+            evaluations/ci_regression_comparison.json
+            evaluations/ci_quality_gate.json
           if-no-files-found: warn
           retention-days: 7
