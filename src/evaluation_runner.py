@@ -1,4 +1,4 @@
-﻿
+
 import asyncio
 import hashlib
 import json
@@ -11,43 +11,92 @@ from classifier import classify_email
 from config import load_prompt_config
 
 
+# --------------------------------------------------
+# Configuration
+# --------------------------------------------------
+
 load_dotenv()
 
-# Load prompt configuration
-config = load_prompt_config(os.getenv("PROMPT_CONFIG_PATH", "prompts/v2.yaml"))
+PROMPT_CONFIG_PATH = os.getenv(
+    "PROMPT_CONFIG_PATH",
+    "prompts/v2.yaml"
+)
 
-# Load Dataset v3 directly (already uses the evaluator's expected schema).
+config = load_prompt_config(PROMPT_CONFIG_PATH)
+
 DATASET_PATH = "datasets/golden_dataset_v3.json"
+
+OUTPUT_PATH = os.getenv(
+    "EVALUATION_CHECKPOINT_PATH",
+    "evaluations/v2_dataset_v3_30_checkpoint.json"
+)
+
+BATCH_SIZE = 3
+BATCH_DELAY = 20
+MAX_RETRIES = 5
+
+
+# --------------------------------------------------
+# Load and validate dataset
+# --------------------------------------------------
 
 with open(DATASET_PATH, "r", encoding="utf-8") as file:
     dataset = json.load(file)
 
-if not isinstance(dataset, dict) or not isinstance(dataset.get("test_cases"), list):
-    raise ValueError("Dataset v3 must contain a test_cases list.")
+if not isinstance(dataset, dict):
+    raise ValueError("Dataset must be a JSON object.")
+
+if not isinstance(dataset.get("test_cases"), list):
+    raise ValueError("Dataset must contain a test_cases list.")
+
+test_ids = []
 
 for case in dataset["test_cases"]:
-    if not all(key in case for key in ("id", "input", "expected_output")):
-        raise ValueError(f"Dataset v3 case missing required fields: {case!r}")
-    if not isinstance(case["expected_output"], dict) or "category" not in case["expected_output"]:
-        raise ValueError(f"Dataset v3 case has no expected category: {case['id']}")
+    if not isinstance(case, dict):
+        raise ValueError("Each test case must be an object.")
+
+    required_fields = ("id", "input", "expected_output")
+
+    if not all(field in case for field in required_fields):
+        raise ValueError(
+            f"Dataset case missing required fields: {case!r}"
+        )
+
+    if not isinstance(case["expected_output"], dict):
+        raise ValueError(
+            f"Invalid expected_output for {case['id']}"
+        )
+
+    if "category" not in case["expected_output"]:
+        raise ValueError(
+            f"Missing expected category for {case['id']}"
+        )
+
+    test_ids.append(case["id"])
+
+if len(test_ids) != len(set(test_ids)):
+    raise ValueError("Dataset contains duplicate test IDs.")
 
 
-# Generate fingerprint for prompt configuration and dataset
+# --------------------------------------------------
+# Fingerprint generation
+# --------------------------------------------------
+
 def create_fingerprint(config, dataset):
     content = {
         "prompt_config": {
             "version": config.version,
             "model": config.model,
             "temperature": config.temperature,
-            "system_prompt": config.system_prompt
+            "system_prompt": config.system_prompt,
         },
-        "dataset": dataset
+        "dataset": dataset,
     }
 
     serialized = json.dumps(
         content,
         sort_keys=True,
-        ensure_ascii=False
+        ensure_ascii=False,
     )
 
     return hashlib.sha256(
@@ -55,7 +104,10 @@ def create_fingerprint(config, dataset):
     ).hexdigest()
 
 
-# Save evaluation results to JSON
+# --------------------------------------------------
+# Atomic checkpoint saving
+# --------------------------------------------------
+
 def save_results(results, file_path, fingerprint):
     directory = os.path.dirname(file_path)
 
@@ -64,7 +116,7 @@ def save_results(results, file_path, fingerprint):
 
     data = {
         "fingerprint": fingerprint,
-        "results": results
+        "results": results,
     }
 
     temporary_path = file_path + ".tmp"
@@ -72,19 +124,22 @@ def save_results(results, file_path, fingerprint):
     with open(
         temporary_path,
         "w",
-        encoding="utf-8"
+        encoding="utf-8",
     ) as file:
         json.dump(
             data,
             file,
             indent=4,
-            ensure_ascii=False
+            ensure_ascii=False,
         )
 
     os.replace(temporary_path, file_path)
 
 
-# Load saved results and validate fingerprint
+# --------------------------------------------------
+# Load and validate checkpoint
+# --------------------------------------------------
+
 def load_results(file_path, expected_fingerprint):
     if not os.path.exists(file_path):
         return []
@@ -92,20 +147,20 @@ def load_results(file_path, expected_fingerprint):
     with open(
         file_path,
         "r",
-        encoding="utf-8"
+        encoding="utf-8",
     ) as file:
         data = json.load(file)
 
     if not isinstance(data, dict):
         raise ValueError(
-            "Saved results use the old format. "
-            "Use a new results filename."
+            "Saved checkpoint uses an unsupported format. "
+            "Use a new checkpoint filename."
         )
 
     if data.get("fingerprint") != expected_fingerprint:
         raise ValueError(
-            "Saved results belong to a different prompt or dataset. "
-            "Use a new results filename."
+            "Checkpoint belongs to a different prompt "
+            "or dataset. Use a new checkpoint filename."
         )
 
     results = data.get("results")
@@ -115,18 +170,43 @@ def load_results(file_path, expected_fingerprint):
             "Invalid checkpoint: results must be a list."
         )
 
+    seen_ids = set()
+
+    for result in results:
+        if not isinstance(result, dict):
+            raise ValueError(
+                "Invalid checkpoint result entry."
+            )
+
+        test_id = result.get("test_id")
+
+        if test_id is None:
+            raise ValueError(
+                "Checkpoint result missing test_id."
+            )
+
+        if test_id in seen_ids:
+            raise ValueError(
+                f"Duplicate checkpoint test ID: {test_id}"
+            )
+
+        seen_ids.add(test_id)
+
     return results
 
 
-# Evaluate one test case
+# --------------------------------------------------
+# Evaluate a single test case
+# --------------------------------------------------
+
 async def evaluate_case(test_case, config, client):
     result = await classify_email(
         test_case["input"],
         config,
-        client
+        client,
     )
 
-    parsed = result["parsed_output"]
+    parsed = result.get("parsed_output")
 
     predicted_category = (
         parsed.get("category")
@@ -134,148 +214,165 @@ async def evaluate_case(test_case, config, client):
         else None
     )
 
-    expected_category = test_case["expected_output"]["category"]
+    predicted_summary = (
+        parsed.get("summary")
+        if isinstance(parsed, dict)
+        else None
+    )
 
-    # Dimension 1: Exact category match (binary)
+    expected_category = (
+        test_case["expected_output"]["category"]
+    )
+
+    error = result.get("error")
+
     category_match = int(
-        result["error"] is None
+        error is None
         and predicted_category == expected_category
     )
 
-    status = (
-        "PASS"
-        if category_match == 1
-        else "FAIL"
-    )
+    # API or parsing errors are marked ERROR.
+    # Genuine incorrect classifications are FAIL.
+    if error is not None:
+        status = "ERROR"
+    elif category_match == 1:
+        status = "PASS"
+    else:
+        status = "FAIL"
 
     return {
         "test_id": test_case["id"],
         "expected_category": expected_category,
-        "raw_output": result["raw_output"],
+        "raw_output": result.get("raw_output"),
         "predicted_category": predicted_category,
-        "predicted_summary": (
-            parsed.get("summary")
-            if isinstance(parsed, dict)
-            else None
-        ),
-        "error": result["error"],
+        "predicted_summary": predicted_summary,
+        "error": error,
         "category_match": category_match,
-        "latency_ms": result["latency_ms"],
-        "token_usage": result["token_usage"],
-        "status": status
+        "latency_ms": result.get("latency_ms"),
+        "token_usage": result.get("token_usage"),
+        "status": status,
     }
 
 
-# Run evaluation with batching, checkpointing, and retries
+# --------------------------------------------------
+# Error result helper
+# --------------------------------------------------
+
+def create_error_result(test_case, message):
+    return {
+        "test_id": test_case["id"],
+        "expected_category": (
+            test_case["expected_output"]["category"]
+        ),
+        "raw_output": None,
+        "predicted_category": None,
+        "predicted_summary": None,
+        "error": str(message),
+        "category_match": 0,
+        "latency_ms": None,
+        "token_usage": {
+            "prompt_tokens": None,
+            "completion_tokens": None,
+            "total_tokens": None,
+        },
+        "status": "ERROR",
+    }
+
+
+# --------------------------------------------------
+# Evaluation runner
+# --------------------------------------------------
+
 async def run_evaluation(config, dataset):
     test_cases = dataset["test_cases"]
-
     selected_cases = test_cases
 
-    batch_size = 3
-    batch_delay = 20
-
-   # Dedicated Dataset v3 checkpoint.
-    # Allow CI to use a separate checkpoint without changing local results.
-    output_path = os.getenv(
-          "EVALUATION_CHECKPOINT_PATH",
-          "evaluations/v2_dataset_v3_30_checkpoint.json"
-
+    fingerprint = create_fingerprint(
+        config,
+        dataset,
     )
-    fingerprint = create_fingerprint(config, dataset)
 
-    # Load previously saved results
     saved_results = load_results(
-        output_path,
-        fingerprint
+        OUTPUT_PATH,
+        fingerprint,
     )
 
-    # Keep results indexed by test ID
+    valid_ids = {
+        case["id"] for case in selected_cases
+    }
+
     results_by_id = {
         result["test_id"]: result
         for result in saved_results
+        if result["test_id"] in valid_ids
     }
 
-    # PASS and FAIL are completed evaluations
+    # A genuine incorrect prediction is still a
+    # completed evaluation. Errors are retryable.
     completed_ids = {
         result["test_id"]
         for result in saved_results
-        if result["status"] in ("PASS", "FAIL")
+        if (
+            result["test_id"] in valid_ids
+            and result.get("status") in ("PASS", "FAIL")
+            and result.get("error") is None
+        )
     }
 
-    # Select only cases that still need evaluation
     pending_cases = [
-        test_case
-        for test_case in selected_cases
-        if test_case["id"] not in completed_ids
+        case
+        for case in selected_cases
+        if case["id"] not in completed_ids
     ]
 
+    print("Prompt version:", config.version)
     print("Selected test cases:", len(selected_cases))
-    print(
-        "Already completed:",
-        len(selected_cases) - len(pending_cases)
-    )
-    print(
-        "Remaining to evaluate:",
-        len(pending_cases)
-    )
+    print("Already completed:", len(completed_ids))
+    print("Remaining to evaluate:", len(pending_cases))
 
-    # Avoid API calls when everything is already completed
     if not pending_cases:
         print(
             "All selected test cases are already completed."
         )
 
         return [
-            results_by_id[test_case["id"]]
-            for test_case in selected_cases
+            results_by_id[case["id"]]
+            for case in selected_cases
         ]
 
-    semaphore = asyncio.Semaphore(3)
+    api_key = os.getenv("GROQ_API_KEY")
 
-    async with AsyncGroq(
-        api_key=os.getenv("GROQ_API_KEY")
-    ) as client:
+    if not api_key:
+        raise RuntimeError(
+            "GROQ_API_KEY is missing. "
+            "Configure it in your environment."
+        )
+
+    semaphore = asyncio.Semaphore(BATCH_SIZE)
+
+    async with AsyncGroq(api_key=api_key) as client:
 
         async def limited_evaluate(test_case):
-            max_retries = 5
-
-            for attempt in range(max_retries):
+            for attempt in range(MAX_RETRIES):
                 try:
                     async with semaphore:
                         return await evaluate_case(
                             test_case,
                             config,
-                            client
+                            client,
                         )
 
                 except RateLimitError as exc:
-                    if attempt == max_retries - 1:
-                        return {
-                            "test_id": test_case["id"],
-                            "expected_category": (
-                                test_case["expected_output"]["category"]
-                            ),
-                            "raw_output": None,
-                            "predicted_category": None,
-                            "predicted_summary": None,
-                            "error": (
-                                "Rate limit exceeded after retries: "
-                                f"{exc}"
-                            ),
-                            "category_match": 0,
-                            "latency_ms": None,
-                            "token_usage": {
-                                "prompt_tokens": None,
-                                "completion_tokens": None,
-                                "total_tokens": None
-                            },
-                            "status": "ERROR"
-                        }
+                    if attempt == MAX_RETRIES - 1:
+                        return create_error_result(
+                            test_case,
+                            "Rate limit exceeded after "
+                            f"{MAX_RETRIES} attempts: {exc}",
+                        )
 
                     wait_time = min(
                         3 * (2 ** attempt),
-                        30
+                        30,
                     )
 
                     print(
@@ -285,98 +382,107 @@ async def run_evaluation(config, dataset):
 
                     await asyncio.sleep(wait_time)
 
-        # Process pending cases in batches
+                except Exception as exc:
+                    return create_error_result(
+                        test_case,
+                        f"{type(exc).__name__}: {exc}",
+                    )
+
+            return create_error_result(
+                test_case,
+                "Evaluation exhausted all retry attempts.",
+            )
+
         for i in range(
             0,
             len(pending_cases),
-            batch_size
+            BATCH_SIZE,
         ):
             batch = pending_cases[
-                i:i + batch_size
+                i:i + BATCH_SIZE
             ]
 
             print(
                 f"Processing batch "
-                f"{i // batch_size + 1}: "
+                f"{i // BATCH_SIZE + 1}: "
                 f"{len(batch)} test cases"
             )
 
             tasks = [
-                limited_evaluate(test_case)
-                for test_case in batch
+                limited_evaluate(case)
+                for case in batch
             ]
 
             batch_results = await asyncio.gather(
                 *tasks
             )
 
-            # Add or update results without duplicate IDs
             for result in batch_results:
                 results_by_id[
                     result["test_id"]
                 ] = result
 
-            # Preserve dataset order
+            # Preserve the original dataset order.
             results = [
-                results_by_id[test_case["id"]]
-                for test_case in selected_cases
-                if test_case["id"] in results_by_id
+                results_by_id[case["id"]]
+                for case in selected_cases
+                if case["id"] in results_by_id
             ]
 
-            # Save after each batch
             save_results(
                 results,
-                output_path,
-                fingerprint
+                OUTPUT_PATH,
+                fingerprint,
             )
 
             print(
                 f"Saved {len(results)} results "
-                f"to {output_path}"
+                f"to {OUTPUT_PATH}"
             )
 
-            # Delay only when another batch remains
-            if i + batch_size < len(pending_cases):
+            if i + BATCH_SIZE < len(pending_cases):
                 print(
-                    f"Waiting {batch_delay} seconds "
+                    f"Waiting {BATCH_DELAY} seconds "
                     "before next batch..."
                 )
 
-                await asyncio.sleep(batch_delay)
+                await asyncio.sleep(BATCH_DELAY)
 
-    # Return completed results in dataset order
     return [
-        results_by_id[test_case["id"]]
-        for test_case in selected_cases
-        if test_case["id"] in results_by_id
+        results_by_id[case["id"]]
+        for case in selected_cases
+        if case["id"] in results_by_id
     ]
 
 
-# Main function
+# --------------------------------------------------
+# Main
+# --------------------------------------------------
+
 async def main():
+    print("\n--- LLM Regression Evaluation ---")
+
     print("Prompt version:", config.version)
+
     print(
         "Dataset version:",
-        dataset["dataset_version"]
+        dataset.get("dataset_version", "unknown"),
     )
+
     print(
         "Total test cases:",
-        len(dataset["test_cases"])
+        len(dataset["test_cases"]),
     )
 
     results = await run_evaluation(
         config,
-        dataset
+        dataset,
     )
 
     correct_predictions = sum(
         1
         for result in results
         if result.get("category_match") == 1
-        or (
-            "category_match" not in result
-            and result["status"] == "PASS"
-        )
     )
 
     total_predictions = len(results)
@@ -387,19 +493,21 @@ async def main():
         else 0
     )
 
+    errors = [
+        result
+        for result in results
+        if (
+            result.get("status") == "ERROR"
+            or result.get("error") is not None
+        )
+    ]
+
     print("\n--- Evaluation Summary ---")
-    print(
-        "Correct predictions:",
-        correct_predictions
-    )
-    print(
-        "Total evaluated:",
-        total_predictions
-    )
-    print(
-        f"Classification accuracy: "
-        f"{accuracy:.2f}%"
-    )
+
+    print("Correct predictions:", correct_predictions)
+    print("Total evaluated:", total_predictions)
+    print(f"Classification accuracy: {accuracy:.2f}%")
+    print("Evaluation errors:", len(errors))
 
     print("\n--- Individual Test Results ---")
 
@@ -407,44 +515,58 @@ async def main():
         print("Test ID:", result["test_id"])
         print(
             "Expected category:",
-            result["expected_category"]
+            result["expected_category"],
         )
         print(
             "Predicted category:",
-            result["predicted_category"]
+            result["predicted_category"],
         )
         print(
             "Predicted summary:",
-            result["predicted_summary"]
+            result["predicted_summary"],
         )
-        print(
-            "Raw output:",
-            result["raw_output"]
-        )
+        print("Raw output:", result["raw_output"])
         print(
             "Category match:",
-            result.get(
-                "category_match",
-                int(result["status"] == "PASS")
-            )
+            result.get("category_match", 0),
         )
         print(
             "Latency (ms):",
-            result.get("latency_ms")
+            result.get("latency_ms"),
         )
         print(
             "Token usage:",
-            result.get("token_usage")
+            result.get("token_usage"),
         )
-        print(
-            "Error:",
-            result["error"]
-        )
-        print(
-            "Status:",
-            result["status"]
-        )
+        print("Error:", result.get("error"))
+        print("Status:", result["status"])
         print("-" * 40)
+
+    expected_count = len(dataset["test_cases"])
+
+    if total_predictions != expected_count:
+        raise RuntimeError(
+            "Incomplete evaluation: "
+            f"expected {expected_count} cases, "
+            f"received {total_predictions}."
+        )
+
+    if errors:
+        failed_ids = [
+            str(result["test_id"])
+            for result in errors
+        ]
+
+        raise RuntimeError(
+            "Evaluation contains API or parsing errors "
+            f"for test cases: {', '.join(failed_ids)}. "
+            "Fix the errors and rerun the evaluation."
+        )
+
+    print(
+        "\nEvaluation completed successfully "
+        "without API or parsing errors."
+    )
 
 
 if __name__ == "__main__":
