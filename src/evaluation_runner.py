@@ -1,4 +1,4 @@
-
+﻿
 import asyncio
 import hashlib
 import json
@@ -14,7 +14,7 @@ from config import load_prompt_config
 load_dotenv()
 
 # Load prompt configuration
-config = load_prompt_config("prompts/v2.yaml")
+config = load_prompt_config(os.getenv("PROMPT_CONFIG_PATH", "prompts/v2.yaml"))
 
 # Load Dataset v3 directly (already uses the evaluator's expected schema).
 DATASET_PATH = "datasets/golden_dataset_v3.json"
